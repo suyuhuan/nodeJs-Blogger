@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{%block main%}
+
+<ol class="breadcrumb">
+  <li><a href="/">首页</a></li>
+  <li><span>内容管理</span></li>
+</ol>
+
+<h3>编辑内容</h3>
+
+<form method="post">
+  <div class="form-group">
+    <label for="title">标题：</label>
+    <input type="text"  value="{{content.title}}" class="form-control" name="title" id="title" placeholder="请输入标题名称">
+  </div>
+   <div class="form-group">
+    <label for="category">分类：</label>
+    <select name="category" id="category" class="form-control" value="{{content.category}}">
+    	 {%for category in categores%}
+          {%if content.category._id.toString() == category._id.toString()%}
+               <option value="{{category._id.toString()}}" selected>{{category.name}}</option>
+          {%else%}
+              <option value="{{category._id.toString()}}">{{category.name}}</option>
+          {%endif%}
+    	 {%endfor%}
+    </select>
+  </div>
+   <div class="form-group">
+    <label for="description">简介：</label>
+    <textarea type="text"   class="form-control" rows="5" name="description" id="description" placeholder="请输入简介">{{content.description}}</textarea>
+  </div>
+   <div class="form-group">
+    <label for="content">内容：</label>
+    <textarea name="content"   id="content" rows="10"  class="form-control" placeholder="请输入内容">{{content.content}}</textarea>
+  </div>
+  <input type="submit" class="btn btn-default"></input>
+</form>
+
+{%endblock%}
